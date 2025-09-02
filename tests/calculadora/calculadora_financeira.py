@@ -37,7 +37,8 @@ def calcular_juros_simples(capital_inicial: float, taxa_anual: float, tempo_anos
         3375.00
     """
     
-    # IFs de Validação
+    # --------IFs de Validação
+
     # capital inicial
     if not isinstance(capital_inicial, (int, float)):
         raise TypeError("Os valores devem ser numéricos")
@@ -47,12 +48,12 @@ def calcular_juros_simples(capital_inicial: float, taxa_anual: float, tempo_anos
     # tempo anos
     if not isinstance(tempo_anos, (int, float)):
         raise TypeError("Os valores devem ser numéricos")
-
-
+    # Validando valores negativos
     if capital_inicial < 0 or taxa_anual < 0 or tempo_anos < 0:
         raise ValueError("devem ser valores não-negativos")
     
-    # ------CÁLCULO -------
+    # ------CÁLCULO 
+
     # Converter taxa percentual para decimal
     taxa_decimal = taxa_anual / 100
     # Fórmula dos juros simples
@@ -64,28 +65,31 @@ def calcular_juros_simples(capital_inicial: float, taxa_anual: float, tempo_anos
 
 
 def calcular_juros_compostos(capital_investido:float, taxa_juros:float, tempo:int) -> tuple:
+
+    # ---------IFs DE VALIDAÇÃO
+
     # Validação do capital investido
     if not isinstance(capital_investido, (int, float)):
         raise ValueError("O capital investido deve ser um número (int ou float).")
     if capital_investido < 0:
         raise ValueError("O capital investido não pode ser negativo.")
-
     # Validação da taxa de juros
     if not isinstance(taxa_juros, (int, float)):
         raise ValueError("A taxa de juros deve ser um número (int ou float).")
     if taxa_juros < 0:
         raise ValueError("A taxa de juros não pode ser negativa.")
-
     # Validação do tempo
     if not isinstance(tempo, (int, float)):
         raise ValueError("O tempo deve ser um número (int ou float).")
     if tempo < 0:
         raise ValueError("O tempo não pode ser negativo.")
 
-    # Cálculo dos juros compostos
+    # ------- Cálculo dos juros compostos
+
     montante = capital_investido * (1 + taxa_juros / 100) ** tempo
     juros = montante - capital_investido
-    
+
+    # RETURN
     return juros, montante
 
 
@@ -115,5 +119,32 @@ def calcular_diferenca_juros(capital_inicial: float, taxa_anual: float, tempo_an
     --------
         float: A diferença entre o montate resultante do calculo do juros composto e o montante do calculo do juros simples, arredondado para 2 casas decimais.
     """
+
+    # --------- IFs de Validação
+
+    # capital inicial
+    if not isinstance(capital_inicial, (int, float)):
+        raise TypeError("Os valores devem ser numéricos")
+    # taxa anual
+    if not isinstance(taxa_anual, (int, float)):
+        raise TypeError("Os valores devem ser numéricos")
+    # tempo em anos
+    if not isinstance(tempo_anos, (int, float)):
+        raise TypeError("Os valores devem ser numéricos")
+    # validação dos valores negativos
+    if capital_inicial < 0 or taxa_anual < 0 or tempo_anos < 0:
+        raise ValueError("devem ser valores não-negativos")
+
+    # ------- CÁLCULO
+
+    # Converter a taxa de juros de PORCENTAGEM para DECIMAL
+    taxa_decimal = taxa_anual / 100
+    # Montante com juros simples
+    montante_s = capital_inicial * (1 + taxa_decimal * tempo_anos)
+    # Montante com juros compostos
+    montante_c = capital_inicial * ((1 + taxa_decimal) ** tempo_anos)
+    # Diferença entre os montantes
+    diferenca = montante_c - montante_s
     
-    return None
+    # Retornar a diferença arredondada para 2 casas decimais
+    return round(diferenca, 2)
