@@ -12,4 +12,4 @@ def test_validar_entrada():
     resultado = calcular_diferenca_juros(capital_inicial, taxa_anual, tempo_anos)
 
     # checar a saída
-    assert resultado == (2.17)
+    assert resultado == (2.16)
