@@ -120,21 +120,6 @@ def calcular_diferenca_juros(capital_inicial: float, taxa_anual: float, tempo_an
         float: A diferença entre o montate resultante do calculo do juros composto e o montante do calculo do juros simples, arredondado para 2 casas decimais.
     """
 
-    # --------- IFs de Validação
-
-    # capital inicial
-    if not isinstance(capital_inicial, (int, float)):
-        raise TypeError("Os valores devem ser numéricos")
-    # taxa anual
-    if not isinstance(taxa_anual, (int, float)):
-        raise TypeError("Os valores devem ser numéricos")
-    # tempo em anos
-    if not isinstance(tempo_anos, (int, float)):
-        raise TypeError("Os valores devem ser numéricos")
-    # validação dos valores negativos
-    if capital_inicial < 0 or taxa_anual < 0 or tempo_anos < 0:
-        raise ValueError("devem ser valores não-negativos")
-
     # ------- CÁLCULO
 
     montante_s = calcular_juros_simples(capital_inicial, taxa_anual, tempo_anos)
