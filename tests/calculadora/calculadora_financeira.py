@@ -137,13 +137,8 @@ def calcular_diferenca_juros(capital_inicial: float, taxa_anual: float, tempo_an
 
     # ------- CÁLCULO
 
-    # Converter a taxa de juros de PORCENTAGEM para DECIMAL
-    taxa_decimal = taxa_anual / 100
-    # Montante com juros simples
-    montante_s = capital_inicial * (1 + taxa_decimal * tempo_anos)
-    # Montante com juros compostos
-    montante_c = capital_inicial * ((1 + taxa_decimal) ** tempo_anos)
-    # Diferença entre os montantes
+    montante_s = calcular_juros_simples(capital_inicial, taxa_anual, tempo_anos)
+    montante_c = calcular_juros_compostos(capital_inicial, taxa_anual, tempo_anos) [1]
     diferenca = montante_c - montante_s
     
     # Retornar a diferença arredondada para 2 casas decimais
